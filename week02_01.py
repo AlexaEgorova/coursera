@@ -10,7 +10,7 @@ def createParser():
     return parser
 
 
-def add_value(key, val, **store):
+def add_value(key, val, store):
     if key in store:
         for i in val:
             if i in store[key]:
@@ -23,11 +23,11 @@ def add_value(key, val, **store):
         s.write(json.dumps(store)) 
 
 
-def print_values(lololoo, **store):
-    if lololoo not in store:
+def print_values(key, store):
+    if key not in store:
         print(None)
     else: 
-        print(*store[lololoo], sep=', ')
+        print(*store[key], sep=', ')
 
 parser = createParser()
 namespace = parser.parse_args()
@@ -40,9 +40,9 @@ else:
         store = json.loads(s.read())
 
 if namespace.val is None:
-    print_values(namespace.key, **store)
+    print_values(namespace.key, store)
 
 else:
-    add_value(namespace.key, namespace.val, **store)
+    add_value(namespace.key, namespace.val, store)
 
 
